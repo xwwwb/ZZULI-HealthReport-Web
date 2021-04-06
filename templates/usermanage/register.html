@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+</head>
+<body>
+<h1>注册页面</h1>
+<form action="/register/" method="post">
+{% if message %}
+    {{ message }}
+{% endif %}
+{%  csrf_token %}
+<h2>欢迎注册</h2>
+{{ register_form }}
+    <input type="reset" value="重置">
+    <input type="submit" value="注册">
+</form>
+</body>
+</html>
