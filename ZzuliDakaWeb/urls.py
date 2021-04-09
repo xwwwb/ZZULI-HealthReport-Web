@@ -23,6 +23,6 @@ urlpatterns = [
     path('register/', views.register),
     path('logout/', views.logout),
     path('', views.index),
-    path('edit/', views.edit),
+    path('editpassword/', views.editpassword),
 
 ]
