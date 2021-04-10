@@ -24,5 +24,7 @@ urlpatterns = [
     path('logout/', views.logout),
     path('', views.index),
     path('editpassword/', views.editpassword),
+    path('resetpassword/', views.resetpassword),
+    path('resetpassword2/', views.resetpassword2)
 
 ]

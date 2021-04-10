@@ -41,7 +41,9 @@
 <main class="form-signin">
     <form method="post" action="/login/">
     {% csrf_token %}
+        <a href="/">
         <img class="mb-4" src="{% static '/assets/brand/favicon.png' %}" alt="" width="72" height="72">
+        </a>
         <h1 class="h3 mb-3 fw-normal">请登录</h1>
         {% if  message %}
             <div class="alert alert-primary" role="alert">
@@ -56,7 +58,7 @@
             <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" required>
             <label for="floatingPassword">密码</label>
         </div>
-        <p>忘记密码了？<a href="" style="text-decoration: unset">点我重置密码</a></p>
+        <p>忘记密码了？<a href="/resetpassword/" style="text-decoration: unset">点我找回密码</a></p>
         {#    <div class="checkbox mb-3">#}
         {#      <label>#}
         {#        <input type="checkbox" value="remember-me"> Remember me#}

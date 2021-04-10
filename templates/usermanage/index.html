@@ -74,6 +74,7 @@
 </div>
 {#<div class="b-example-divider"></div>#}
 <div class="container">
+    {% if not request.session.is_login %}
     <div class="jumbotron">
         <h1 class="display-4">欢迎使用</h1>
         <h3>郑州轻工业大学自动健康打卡服务</h3>
@@ -88,6 +89,23 @@
     </div>
     <hr class="my-4">
     <p style="text-align: center">Powered By Django</p>
+
+    {% else %}
+        <div class="jumbotron">
+        <h1 class="display-4">欢迎使用</h1>
+        <h3>郑州轻工业大学自动健康打卡服务</h3>
+{#        <p class="lead">请注册&登陆后食用</p>#}
+        <hr class="my-4">
+        <p>
+            此网站可提供自动健康打卡服务
+            本项目仅供本人学习
+            您的所有隐私信息都不会被暴露，请放心使用
+        </p>
+{#        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>#}
+    </div>
+    <hr class="my-4">
+    <p style="text-align: center">Powered By Django</p>
+    {% endif %}
 </div>
 <script src="{% static '/assets/dist/js/bootstrap.bundle.min.js' %}"></script>
 </body>
