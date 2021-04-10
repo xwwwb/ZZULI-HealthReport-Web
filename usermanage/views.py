@@ -165,3 +165,106 @@ def resetpassword2(request):
 
         return redirect('/resetpassword/')
     return render(request, 'usermanage/resetpassword2.html')
+
+def dakaconfig(request):
+    if not request.session.get('is_login', None):
+        return redirect('/login')
+    else:
+        userid = request.session['user_id']
+        dakaconfig = models.User.objects.get(id=userid)
+        schoolid = dakaconfig.schoolid
+        schoopassword = dakaconfig.schoolpassword
+        moble = dakaconfig.mobile
+        homemoble = dakaconfig.homemobile
+        schoolgps = dakaconfig.schoolgps
+        dorm = dakaconfig.dorm
+        region = dakaconfig.region
+        area = dakaconfig.area
+        build = dakaconfig.build
+        schoollon = dakaconfig.schoollon
+        schoollat = dakaconfig.schoollat
+        userconfig ={
+            'schoolid':schoolid,
+            'schoolpassword':schoopassword,
+            'moble':moble,
+            'homemoble':homemoble,
+            'schoolgps':schoolgps,
+            'dorm':dorm,
+            'region':region,
+            'area':area,
+            'build':build,
+            'schoollon':schoollon,
+            'schoollat':schoollat,
+        }
+
+        regionarr = ["东风校区", "科学校区", "禹州实习训练基地", "校外走读"]
+        areaarr = [
+            ["一区", "二区", "三区", "丰华区", "秋实区"],
+            ["宿舍区"],
+            ["宿舍区"],
+            ["无"]
+        ]
+        buildarr = [
+            [
+                ["1号楼", "2号楼", "3号楼", "4号楼", "5号楼", "6号楼", "7号楼"],
+                ["1号楼", "2号楼", "3号楼", "4号楼", "5号楼", "6号楼", "7号楼", "8号楼"],
+                ["附1号楼", "附2号楼", "附3号楼"],
+                ["北楼", "南楼"],
+                ["5号楼", "7号楼", "8号楼"]
+            ],
+            [
+                ["1号楼", "2号楼", "3号楼", "4号楼", "5号楼", "6号楼", "7号楼", "8号楼", "9号楼", "10号楼", "11号楼"]
+            ],
+            [
+                ["一层：122-177", "二层：222-277", "三层：322-377", "四层：422-477", "五层：501-577", "六层：601-677"]
+            ],
+            [
+                ["无"]
+            ]
+        ]
+        regionstr=regionarr[int(region)]
+        areastr=areaarr[int(region)][int(area)]
+        buildstr=buildarr[int(region)][int(area)][int(build)]
+        print(f"{regionstr}{areastr}{buildstr}")
+        if request.method == "POST":
+            schoolid=request.POST.get("schoolid")
+            schoopassword=request.POST.get("schoolpassword")
+            moble=request.POST.get("moble")
+            homemoble=request.POST.get("homemoble")
+            schoolgps=request.POST.get("schoolgps")
+            dorm=request.POST.get("dorm")
+            region=request.POST.get("region")
+            area=request.POST.get("area")
+            build=request.POST.get("build")
+            schoollon=request.POST.get("schoollon")
+            schoollat=request.POST.get("schoollat")
+
+            dakaconfig.schoolid =  schoolid
+            dakaconfig.schoolpassword = schoopassword
+            dakaconfig.mobile = moble
+            dakaconfig.homemobile = homemoble
+            dakaconfig.schoolgps = schoolgps
+            dakaconfig.dorm = dorm
+            dakaconfig.region =  region
+            dakaconfig.area = area
+            dakaconfig.build = build
+            dakaconfig.schoollon = schoollon
+            dakaconfig.schoollat = schoollat
+            dakaconfig.save()
+            userconfig = {
+                'schoolid': schoolid,
+                'schoolpassword': schoopassword,
+                'moble': moble,
+                'homemoble': homemoble,
+                'schoolgps': schoolgps,
+                'dorm': dorm,
+                'region': region,
+                'area': area,
+                'build': build,
+                'schoollon': schoollon,
+                'schoollat': schoollat,
+            }
+            message="更新资料成功，页面即将刷新"
+            return render(request, 'usermanage/dakaconfig.html',{'userconfig':userconfig ,'message':message})
+        return render(request, 'usermanage/dakaconfig.html',{'userconfig':userconfig})
+

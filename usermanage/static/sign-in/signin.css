@@ -37,3 +37,6 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+ a{
+            transition: all .2s ease-in-out;
+        }

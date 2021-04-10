@@ -25,6 +25,7 @@ urlpatterns = [
     path('', views.index),
     path('editpassword/', views.editpassword),
     path('resetpassword/', views.resetpassword),
-    path('resetpassword2/', views.resetpassword2)
+    path('resetpassword2/', views.resetpassword2),
+    path('dakaconfig/', views.dakaconfig)
 
 ]

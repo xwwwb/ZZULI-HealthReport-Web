@@ -2,17 +2,21 @@ from django.db import models
 
 # Create your models here.
 class User(models.Model):
-    '''用户表'''
-
-    # gender = (
-    #     ('male', '男'),
-    #     ('female', '女'),
-    # )
-
     name = models.CharField(max_length=128, unique=True)
     password = models.CharField(max_length=256)
     email = models.EmailField(unique=True)
-    # sex = models.CharField(max_length=32, choices=gender, default='男')
+    schoolid=models.CharField(max_length=20,default="540000000000")
+    schoolpassword=models.CharField(max_length=256,default="zzuli000000")
+    mobile=models.CharField(max_length=20,default="16666666666")
+    homemobile=models.CharField(max_length=20,default="16666666666")
+    region=models.CharField(max_length=20,default="东风校区")
+    area=models.CharField(max_length=20,default="二区")
+    build=models.CharField(max_length=20,default="5号楼")
+    dorm=models.CharField(max_length=20,default="200")
+    schoolgps=models.CharField(max_length=20,default="河南省郑州市金水区郑州轻工业大学第二学生园区")
+    schoollat=models.CharField(max_length=20,default="34.48000")
+    schoollon=models.CharField(max_length=20,default="113.39190")
+
     c_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
