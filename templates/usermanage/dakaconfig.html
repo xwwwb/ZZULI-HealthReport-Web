@@ -123,7 +123,9 @@
 {#                        <strong>$20</strong>#}
 {#                    </li>#}
                 </ul>
-{##}
+
+{##}            <button class="w-100 btn btn-success btn-lg" onclick="javascrtpt:window.location.href='/'">回到主页</button>
+
 {#                <form class="card p-2">#}
 {#                    <div class="input-group">#}
 {#                        <input type="text" class="form-control" placeholder="Promo code">#}
@@ -155,9 +157,9 @@
                         </div>
 
                         <div class="col-12">
-                            <label for="Moble" class="form-label">手机号</label>
+                            <label for="mobile" class="form-label">手机号</label>
                             <div class="input-group has-validation">
-                                <input type="text" class="form-control"  placeholder=" " value="{{ userconfig.moble }}" name="moble" required>
+                                <input type="text" class="form-control"  placeholder=" " value="{{ userconfig.mobile }}" name="mobile" required>
                                  <div class="invalid-feedback">
                                 请填写此栏目
                             </div>
@@ -165,8 +167,8 @@
                         </div>
 
                         <div class="col-12">
-                            <label for="HomeMoble" class="form-label">家庭手机号</label>
-                            <input type="text" class="form-control"  placeholder=" " value="{{ userconfig.homemoble }}" name="homemoble">
+                            <label for="Homemobile" class="form-label">家庭手机号</label>
+                            <input type="text" class="form-control"  placeholder=" " value="{{ userconfig.homemobile }}" name="homemobile">
                               <div class="invalid-feedback">
                                 请填写此栏目
                             </div>
