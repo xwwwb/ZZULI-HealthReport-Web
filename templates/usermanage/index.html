@@ -39,7 +39,7 @@
         </a>
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <li><a href="#" class="nav-link px-2 link-secondary">主页</a></li>
-{#            <li><a href="#" class="nav-link px-2 link-dark">查看打卡历史</a></li>#}
+            {#            <li><a href="#" class="nav-link px-2 link-dark">查看打卡历史</a></li>#}
             <li><a href="#" class="nav-link px-2 link-dark">常见问题</a></li>
             <li><a href="#" class="nav-link px-2 link-dark">关于</a></li>
         </ul>
@@ -51,8 +51,18 @@
                         {{ request.session.user_name }}
                     </button>
                     <ul class="dropdown-menu">
+                        <script>
+                            function singlerun() {
+                                var r = confirm("您确定使用单次打卡测试？点击确定开始。开始后请耐心等待页面加载，大约30内即可看到打卡结果，如果30秒内页面没有加载出来，请手动关闭网页并检查信息填写，不要反复刷新页面！！反复刷新页面会导致打卡错误！");
+                                if (r == true) {
+                                    window.open("/singlerun");
+                                } else {
+                                }
+                            }
+                        </script>
                         <li><a class="dropdown-item" target="_blank" href="/dakaconfig">修改打卡信息</a></li>
-                        <li><a class="dropdown-item" target="_blank/editpassword">修改个人信息</a></li>
+                        <li><a class="dropdown-item" target="_blank" href="/editpassword">修改账户密码</a></li>
+                        <li><a class="dropdown-item" target="_blank" onclick="singlerun()">执行单次打卡测试</a></li>
                         <li><a class="dropdown-item" target="_blank">查看打卡历史</a></li>
                         <li>
                             <hr class="dropdown-divider">
@@ -75,36 +85,45 @@
 {#<div class="b-example-divider"></div>#}
 <div class="container">
     {% if not request.session.is_login %}
-    <div class="jumbotron">
-        <h1 class="display-4">欢迎使用</h1>
-        <h3>郑州轻工业大学自动健康打卡服务</h3>
-        <p class="lead">请注册&登陆后食用</p>
+        <div class="jumbotron">
+            <h1 class="display-4">欢迎使用</h1>
+            <h3>郑州轻工业大学自动健康打卡服务</h3>
+            <p class="lead">请注册&登陆后食用</p>
+            <hr class="my-4">
+            <p>
+                此网站可提供自动健康打卡服务
+                本项目仅供本人学习
+                您的所有隐私信息都不会被暴露，请放心使用
+            </p>
+            {#        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>#}
+        </div>
         <hr class="my-4">
-        <p>
-            此网站可提供自动健康打卡服务
-            本项目仅供本人学习
-            您的所有隐私信息都不会被暴露，请放心使用
-        </p>
-{#        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>#}
-    </div>
-    <hr class="my-4">
-    <p style="text-align: center">Powered By Django</p>
+        <p style="text-align: center">Powered By Django</p>
 
     {% else %}
         <div class="jumbotron">
-        <h1 class="display-4">欢迎使用</h1>
-        <h3>郑州轻工业大学自动健康打卡服务</h3>
-{#        <p class="lead">请注册&登陆后食用</p>#}
+            <h1 class="display-4">欢迎使用</h1>
+            <h3>郑州轻工业大学自动健康打卡服务</h3>
+            {#        <p class="lead">请注册&登陆后食用</p>#}
+            <hr class="my-4">
+            <p>
+                此网站可提供自动健康打卡服务
+                本项目仅供本人学习
+                您的所有隐私信息都不会被暴露，请放心使用
+            </p>
+            <hr class="my-4">
+            <ul>
+                <li>使用方法：</li>
+                <li>点击右上角用户名</li>
+                <li>修改打卡信息</li>
+                <li>执行单次打卡测试</li>
+                <li>若成功，则在第二天早上5点自动执行打卡程序</li>
+            </ul>
+
+            {#        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>#}
+        </div>
         <hr class="my-4">
-        <p>
-            此网站可提供自动健康打卡服务
-            本项目仅供本人学习
-            您的所有隐私信息都不会被暴露，请放心使用
-        </p>
-{#        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>#}
-    </div>
-    <hr class="my-4">
-    <p style="text-align: center">Powered By Django</p>
+        <p style="text-align: center">Powered By Django</p>
     {% endif %}
 </div>
 <script src="{% static '/assets/dist/js/bootstrap.bundle.min.js' %}"></script>

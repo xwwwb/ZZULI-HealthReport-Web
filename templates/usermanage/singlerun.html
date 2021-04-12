@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>打卡结果</title>
+</head>
+<body>
+<button onclick="check()">点我查看结果</button>
+<p></p>
+            <script>
+                function check() {
+                                var r = confirm("{{ message }}");
+                                if (r == true) {
+                                                      window.opener = null;
+window.open('/','_self');
+window.close();
+                                } else {
+                                }}
+            </script>
+</body>
+</html>

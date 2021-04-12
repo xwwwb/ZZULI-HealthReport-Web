@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 # from .froms import UserForm, RegisterForm
 from usermanage import models
 from usermanage.function import hash_code,genrandom,sendcheckemail,checkpassword
+from usermanage.run import allruns,singlerun
+
 # Create your views here.
 
 def index(request):
@@ -237,6 +239,27 @@ def dakaconfig(request):
                 'schoollat': schoollat,
             }
             message="更新资料成功，页面即将刷新"
-            return render(request, 'usermanage/dakaconfig.html',{'userconfig':userconfig ,'message':message})
-        return render(request, 'usermanage/dakaconfig.html',{'userconfig':userconfig})
+            return render(request, 'usermanage/dakaconfig.html',context={'userconfig':userconfig ,'message':message})
+        return render(request, 'usermanage/dakaconfig.html',context={'userconfig':userconfig})
 
+def singlerunweb(request):
+    if not request.session.get('is_login', None):
+        return redirect('/login')
+    else:
+        userid = request.session['user_id']
+        userid=int(userid)
+        print(f"\n正在执行单次打卡。打卡id:{userid}\n")
+        dakastate=singlerun(userid)
+        if int(dakastate.get('state')):
+            message="打卡成功"
+        else:
+            message="打卡失败,请仔细检查填写的信息"
+        return render(request,'usermanage/singlerun.html',context={'message':message})
+
+def allrunweb(request):
+        password=request.GET
+        getpassword=password.get("password")
+        if getpassword=="这里密码请自设":
+            allruns()
+        return redirect('/')
+# 通过手动发送get请求实现全部打卡

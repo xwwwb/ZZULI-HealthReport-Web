@@ -1,6 +1,14 @@
 from usermanage import models
-from usermanage.daka import main
+from usermanage.daka import main,notification,encode
 import time
+datetime = time.strftime("%Y-%m-%d", time.localtime())
+def sendemail(reportstatus,username,historyurl,my_user,my_sender,SMTPdomain,SMTPauth,datetime,reporttype):
+    if reportstatus == 1:
+        notification.mail(username, "成功", historyurl, my_user, my_sender, SMTPdomain, SMTPauth, datetime, reporttype)
+        print("打卡成功，已发送邮件")
+    else:
+        notification.mail(username, "失败", historyurl, my_user, my_sender, SMTPdomain, SMTPauth, datetime, reporttype)
+        print("打卡失败，已发送邮件")
 def getaddr(region,area,build):
     regionarr = ["东风校区", "科学校区", "禹州实习训练基地", "校外走读"]
     areaarr = [
@@ -31,34 +39,54 @@ def getaddr(region,area,build):
     areastr = areaarr[int(region)][int(area)]
     buildstr = buildarr[int(region)][int(area)][int(build)]
     return regionstr,areastr,buildstr
-def runs():
-    datetime = time.strftime("%Y-%m-%d", time.localtime())
+def singlerun(id):
+    userobb = models.User.objects.get(id=id)
+    email=userobb.email
+    schoolid = userobb.schoolid
+    schoopassword = userobb.schoolpassword
+    mobile = userobb.mobile
+    homemobile = userobb.homemobile
+    schoolgps = userobb.schoolgps
+    dorm = userobb.dorm
+    region = userobb.region
+    area = userobb.area
+    build = userobb.build
+    schoollon = userobb.schoollon
+    schoollat = userobb.schoollat
+    addrstr = getaddr(region, area, build)
+    region = addrstr[0]
+    area = addrstr[1]
+    build = addrstr[2]
+    email = userobb.email
+    reporttype = "morn"
+    gpslocation = ""
+    lat = 0
+    lon = 0
+    states = {}
+    state = 0
+    my_sender="geekxwb@163.com"
+    SMTPdomain="smtp.163.com"
+    SMTPauth="LCEDLQRIGVIYXPGJ"
+    historyurl = encode.encode(schoolid)
+    try:
+        state = main.service(schoolid, schoopassword, mobile, homemobile, gpslocation, lat, lon, datetime, reporttype,
+                             region, area, build,
+                             dorm, schoolgps, schoollat, schoollon)
+        sendemail(state, schoolid, historyurl, email, my_sender, SMTPdomain, SMTPauth, datetime, reporttype)
+    except:
+        pass
+
+    states = {'userid': id, 'state': state}
+    return states
+
+def allruns():
     count=models.User.objects.all().count()
     count=int(count)
-    print(count)
+    print(f"\n准备开始批量打卡，总数为：{count}\n")
     i=1
+    allrunsstates=[]
     while(i<=count):
-        userobb=models.User.objects.get(id=i)
-        schoolid = userobb.schoolid
-        schoopassword = userobb.schoolpassword
-        mobile = userobb.mobile
-        homemobile = userobb.homemobile
-        schoolgps = userobb.schoolgps
-        dorm = userobb.dorm
-        region = userobb.region
-        area = userobb.area
-        build = userobb.build
-        schoollon = userobb.schoollon
-        schoollat = userobb.schoollat
-        addrstr=getaddr(region,area,build)
-        region = addrstr[0]
-        area = addrstr[1]
-        build = addrstr[2]
-        email= userobb.email
-        reporttype="morn"
-        gpslocation=""
-        lat= 0
-        lon= 0
-        main.service(schoolid, schoopassword, mobile, homemobile, gpslocation, lat, lon, datetime, reporttype, region, area, build,
-            dorm, schoolgps, schoollat, schoollon)
+        states=singlerun(i)
+        allrunsstates.append(states)
         i=i+1
+    print(allrunsstates)

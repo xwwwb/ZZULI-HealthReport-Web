@@ -13,7 +13,7 @@ class User(models.Model):
     area=models.CharField(max_length=20,default="0")
     build=models.CharField(max_length=20,default="0")
     dorm=models.CharField(max_length=20,default="200")
-    schoolgps=models.CharField(max_length=20,default="河南省郑州市金水区郑州轻工业大学第二学生园区")
+    schoolgps=models.CharField(max_length=80,default="河南省郑州市金水区郑州轻工业大学第二学生园区")
     schoollat=models.CharField(max_length=20,default="34.48000")
     schoollon=models.CharField(max_length=20,default="113.39190")
 

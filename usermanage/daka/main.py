@@ -4,7 +4,7 @@ import time
 from selenium import webdriver
 from retrying import retry
 
-debug = 1  # 调试模式
+debug = 0  # 调试模式
 '''
 this module is the main module. it will get cookies and post your report data
 if you are not developer,you must NOT write anything in this file
@@ -20,72 +20,75 @@ def service(username, password, mobile, homemobile, gpslocation, lat, lon, datet
 
     try:
         opt = webdriver.ChromeOptions()  # 创建浏览器
-        # opt.add_argument('headless')
-        # opt.add_argument('no-sandbox')
-        # opt.add_argument('disable-dev-shm-usage')
+        opt.add_argument('headless')
+        opt.add_argument('no-sandbox')
+        opt.add_argument('disable-dev-shm-usage')
         driver = webdriver.Chrome(options=opt)  # create the
     except:
         print("浏览器创建失败，请检查chromedriver配置")
-    driver.get(loginurl)
-    # driver.maximize_window()                      #maximize the window
-    time.sleep(0.1)  # 加载等待
-    driver.find_element_by_xpath("./*//div[@class='p-r']/input").send_keys(username)  # 输入账号
-    driver.find_element_by_xpath("//input[@class='qy-log-input form-control pasword']").send_keys(password)  # 输入密码
-    time.sleep(0.1)
-    driver.find_element_by_xpath("//input[@class='qy-log-btn is-on']").click  # 登录
-    botton = 'document.getElementsByClassName("qy-log-btn is-on")[0].click();'
-    driver.execute_script(botton)  # 登录
-    time.sleep(0.1)
-    #############肺炎打卡##################
-    #############################
-    #  链接处理                   #
-    #############################
-    driver.get(url2)
+    try:
+        driver.get(loginurl)
+        # driver.maximize_window()                      #maximize the window
+        time.sleep(0.1)  # 加载等待
+        driver.find_element_by_xpath("./*//div[@class='p-r']/input").send_keys(username)  # 输入账号
+        driver.find_element_by_xpath("//input[@class='qy-log-input form-control pasword']").send_keys(password)  # 输入密码
+        time.sleep(0.1)
+        driver.find_element_by_xpath("//input[@class='qy-log-btn is-on']").click  # 登录
+        botton = 'document.getElementsByClassName("qy-log-btn is-on")[0].click();'
+        driver.execute_script(botton)  # 登录
+        time.sleep(0.1)
+        #############肺炎打卡##################
+        #############################
+        #  链接处理                   #
+        #############################
+        driver.get(url2)
 
-    for link in driver.find_elements_by_xpath("//*[@data-href]"):  # 获取data-href元素
+        for link in driver.find_elements_by_xpath("//*[@data-href]"):  # 获取data-href元素
 
-        # 处理每日打卡链接
-        dakaurl = link.get_attribute('data-href')
-        getuserurl = dakaurl  # 截取学校储存的data
-        getuserurl = getuserurl.replace('view?from=h5&', 'get_user_info?') + "&wj_type=0"
-        if reporttype == "home":
-            dakaurl = dakaurl + "&date=" + datetime
-        elif reporttype == "morn":
-            dakaurl = dakaurl + "&date=" + datetime
-            dakaurl = dakaurl.replace('xsc', 'morn')
-            getuserurl = getuserurl.replace('&wj_type=0', '&wj_type=1')
-        elif reporttype == "dorm":
-            dakaurl = dakaurl + "&date=" + datetime
-            dakaurl = dakaurl.replace('xsc', 'dorm')
-            getuserurl = getuserurl.replace('&wj_type=0', '&wj_type=3')
-        # 结束
-        finaldakaurl = dakaurl + "&date=" + datetime
-        if debug == 1:
-            print(f"从服务器获取的链接：\n{getuserurl}")
-            print(f"打卡链接：\n{dakaurl}")
-        # get cookie
-        driver.get(finaldakaurl)
-        time.sleep(1)
-        for i in range(0, 5):
-            try:
-                links = driver.find_elements_by_xpath("//a")
-                break
-            except Exception as e:
-                if 'alert' in str(e):
-                    pass
-                else:
-                    links = []
+            # 处理每日打卡链接
+            dakaurl = link.get_attribute('data-href')
+            getuserurl = dakaurl  # 截取学校储存的data
+            getuserurl = getuserurl.replace('view?from=h5&', 'get_user_info?') + "&wj_type=0"
+            if reporttype == "home":
+                dakaurl = dakaurl + "&date=" + datetime
+            elif reporttype == "morn":
+                dakaurl = dakaurl + "&date=" + datetime
+                dakaurl = dakaurl.replace('xsc', 'morn')
+                getuserurl = getuserurl.replace('&wj_type=0', '&wj_type=1')
+            elif reporttype == "dorm":
+                dakaurl = dakaurl + "&date=" + datetime
+                dakaurl = dakaurl.replace('xsc', 'dorm')
+                getuserurl = getuserurl.replace('&wj_type=0', '&wj_type=3')
+            # 结束
+            finaldakaurl = dakaurl + "&date=" + datetime
+            if debug == 1:
+                print(f"从服务器获取的链接：\n{getuserurl}")
+                print(f"打卡链接：\n{dakaurl}")
+            # get cookie
+            driver.get(finaldakaurl)
+            time.sleep(1)
+            for i in range(0, 5):
+                try:
+                    links = driver.find_elements_by_xpath("//a")
                     break
-        selenium_cookies = driver.get_cookies()
+                except Exception as e:
+                    if 'alert' in str(e):
+                        pass
+                    else:
+                        links = []
+                        break
+            selenium_cookies = driver.get_cookies()
 
-    #############################
-    #  cookie处理                #
-    #############################
+        #############################
+        #  cookie处理                #
+        #############################
 
-    cookies = {}
-    for cookie in selenium_cookies:
-        cookies[cookie['name']] = cookie['value']
-
+        cookies = {}
+        for cookie in selenium_cookies:
+            cookies[cookie['name']] = cookie['value']
+    except:
+        driver.quit()
+        return 0
     # 替换cookie中可能出现的%3D为等号
     xsrftoken = cookies.get("XSRF-TOKEN", )
     xxsrftoken = xsrftoken.replace('%3D', '=')

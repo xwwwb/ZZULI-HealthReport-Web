@@ -24,9 +24,11 @@
             -moz-user-select: none;
             user-select: none;
         }
-        a{
+
+        a {
             transition: all .2s ease-in-out;
         }
+
         @media (min-width: 768px) {
             .bd-placeholder-img-lg {
                 font-size: 3.5rem;
@@ -42,14 +44,15 @@
 <div class="container">
     <main>
         <div class="py-5 text-center">
-            <a href="/" ><img class="d-block mx-auto mb-4" src="{% static 'assets/brand/favicon.png' %}" alt="" width="72"
-                 height="72"></a>
+            <a href="/"><img class="d-block mx-auto mb-4" src="{% static 'assets/brand/favicon.png' %}" alt=""
+                             width="72"
+                             height="72"></a>
 
             <h2>打卡信息填写</h2>
             <p class="lead">请仔细阅读右边的注意事项</p>
         </div>
         {% if message %}
-         <div class="alert alert-success" role="alert">
+            <div class="alert alert-success" role="alert">
                 {{ message }}
             </div>
             <script>
@@ -88,61 +91,71 @@
                             <h6 class="my-0">学校地址请详细填写 例：</h6>
                             <small class="text-muted">河南省郑州市金水区郑州轻工业大学第二学生园区</small>
                         </div>
-{#                        <span class="text-muted">$5</span>#}
+                        {#                        <span class="text-muted">$5</span>#}
                     </li>
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
                         <div>
-                            <h6 class="my-0">经纬度查询：<a href="https://lbs.amap.com/console/show/picker" target="_blank" style="text-decoration-line: none">点我查询</a></h6>
+                            <h6 class="my-0">经纬度查询：<a href="https://lbs.amap.com/console/show/picker" target="_blank"
+                                                      style="text-decoration-line: none">点我查询</a></h6>
                             <small class="text-muted">部分手机内置指南针也可查询经纬度</small>
                         </div>
-{#                        <span class="text-muted">$5</span>#}
+                        {#                        <span class="text-muted">$5</span>#}
                     </li>
-                            <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
                         <div>
                             <h6 class="my-0">经纬度要求小数点后保留5位小数 例：</h6>
                             <small class="text-muted">34.48000 113.39190</small>
                         </div>
-{#                        <span class="text-muted">$5</span>#}
+                        {#                        <span class="text-muted">$5</span>#}
                     </li>
-                            <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
                         <div>
-                            <h6 class="my-0">每次提交表格时，都要仔细核对每一项内容</h6>
-                            <small class="text-muted">一定要仔细核对，不要留一个空的表单</small>
+                            <h6 class="my-0">每次提交表格时 都要仔细核对每一项内容</h6>
+                            <small class="text-muted">一定要仔细核对 不要留一个空的表单</small>
                         </div>
-{#                        <span class="text-muted">$5</span>#}
+                        {#                        <span class="text-muted">$5</span>#}
                     </li>
-{#                    <li class="list-group-item d-flex justify-content-between lh-sm">#}
-{#                        <div class="text-success">#}
-{#                            <h6 class="my-0">Promo code</h6>#}
-{#                            <small>EXAMPLECODE</small>#}
-{#                        </div>#}
-{#                        <span class="text-success">−$5</span>#}
-{#                    </li>#}
-{#                    <li class="list-group-item d-flex justify-content-between">#}
-{#                        <span>Total (USD)</span>#}
-{#                        <strong>$20</strong>#}
-{#                    </li>#}
+                     <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div class="text-danger">
+                            <h6 class="my-0">每次提交表格后 都要去单次打卡一次</h6>
+                            <small class="text-muted">若收不到打卡提醒请检查您的信息填写</small>
+                        </div>
+                        {#                        <span class="text-muted">$5</span>#}
+                    </li>
+                    {#                    <li class="list-group-item d-flex justify-content-between lh-sm">#}
+                    {#                        <div class="text-success">#}
+                    {#                            <h6 class="my-0">Promo code</h6>#}
+                    {#                            <small>EXAMPLECODE</small>#}
+                    {#                        </div>#}
+                    {#                        <span class="text-success">−$5</span>#}
+                    {#                    </li>#}
+                    {#                    <li class="list-group-item d-flex justify-content-between">#}
+                    {#                        <span>Total (USD)</span>#}
+                    {#                        <strong>$20</strong>#}
+                    {#                    </li>#}
                 </ul>
 
-{##}            <button class="w-100 btn btn-success btn-lg" onclick="javascrtpt:window.location.href='/'">回到主页</button>
+                {##}
+                <button class="w-100 btn btn-success btn-lg" onclick="javascrtpt:window.location.href='/'">回到主页</button>
 
-{#                <form class="card p-2">#}
-{#                    <div class="input-group">#}
-{#                        <input type="text" class="form-control" placeholder="Promo code">#}
-{#                        <button type="submit" class="btn btn-secondary">Redeem</button>#}
-{#                    </div>#}
-{#                </form>#}
+                {#                <form class="card p-2">#}
+                {#                    <div class="input-group">#}
+                {#                        <input type="text" class="form-control" placeholder="Promo code">#}
+                {#                        <button type="submit" class="btn btn-secondary">Redeem</button>#}
+                {#                    </div>#}
+                {#                </form>#}
             </div>
             <div class="col-md-7 col-lg-8">
                 <h4 class="mb-3">信息填写</h4>
                 <form class="needs-validation" method="post" action="/dakaconfig/">
-                   {%   csrf_token %}
+                    {% csrf_token %}
                     <div class="row g-3">
                         <div class="col-sm-6">
 
                             <label for="SchoolID" class="form-label">学号</label>
 
-                            <input type="text" class="form-control" placeholder=" " value="{{ userconfig.schoolid }}" name="schoolid" required>
+                            <input type="text" class="form-control" placeholder=" " value="{{ userconfig.schoolid }}"
+                                   name="schoolid" required>
                             <div class="invalid-feedback">
                                 请填写此栏目
                             </div>
@@ -150,8 +163,9 @@
 
                         <div class="col-sm-6">
                             <label for="SchoolPassword" class="form-label">i轻工大密码</label>
-                            <input type="text" class="form-control" placeholder=" " value="{{ userconfig.schoolpassword }}" name="schoolpassword" required>
-                             <div class="invalid-feedback">
+                            <input type="text" class="form-control" placeholder=" "
+                                   value="{{ userconfig.schoolpassword }}" name="schoolpassword" required>
+                            <div class="invalid-feedback">
                                 请填写此栏目
                             </div>
                         </div>
@@ -159,17 +173,19 @@
                         <div class="col-12">
                             <label for="mobile" class="form-label">手机号</label>
                             <div class="input-group has-validation">
-                                <input type="text" class="form-control"  placeholder=" " value="{{ userconfig.mobile }}" name="mobile" required>
-                                 <div class="invalid-feedback">
-                                请填写此栏目
-                            </div>
+                                <input type="text" class="form-control" placeholder=" " value="{{ userconfig.mobile }}"
+                                       name="mobile" required>
+                                <div class="invalid-feedback">
+                                    请填写此栏目
+                                </div>
                             </div>
                         </div>
 
                         <div class="col-12">
                             <label for="Homemobile" class="form-label">家庭手机号</label>
-                            <input type="text" class="form-control"  placeholder=" " value="{{ userconfig.homemobile }}" name="homemobile">
-                              <div class="invalid-feedback">
+                            <input type="text" class="form-control" placeholder=" " value="{{ userconfig.homemobile }}"
+                                   name="homemobile">
+                            <div class="invalid-feedback">
                                 请填写此栏目
                             </div>
                         </div>
@@ -177,7 +193,8 @@
                         <div class="col-12">
                             <label for="SchoolAddress" class="form-label">学校地址<span
                                     class="text-muted">(详情参见注意事项)</span></label>
-                            <input type="text" class="form-control" placeholder=" " value="{{ userconfig.schoolgps }}" name = "schoolgps" required>
+                            <input type="text" class="form-control" placeholder=" " value="{{ userconfig.schoolgps }}"
+                                   name="schoolgps" required>
                             <div class="invalid-feedback">
                                 请填写此栏目
                             </div>
@@ -185,18 +202,19 @@
 
                         <div class="col-12">
                             <label for="dorm" class="form-label">宿舍号<span class="text-muted">(例：426)</span></label>
-                            <input type="text" class="form-control" name="dorm" value="{{ userconfig.dorm }}" placeholder=" ">
-                        <div class="invalid-feedback">
+                            <input type="text" class="form-control" name="dorm" value="{{ userconfig.dorm }}"
+                                   placeholder=" ">
+                            <div class="invalid-feedback">
                                 请填写此栏目
                             </div>
                         </div>
                         <div class="col-md-4">
                             <label for="country" class="form-label">校区</label>
-                            <select class="form-select" id="region"  name="region" onchange="chg(this);">
+                            <select class="form-select" id="region" name="region" onchange="chg(this);">
 
                                 <option value="-1">请选择</option>
-                                </select>
-                           <div class="invalid-feedback">
+                            </select>
+                            <div class="invalid-feedback">
                                 请填写此栏目
                             </div>
                         </div>
@@ -206,17 +224,17 @@
                             <select class="form-select" name="area" id="area" onchange="chg2(this);" required>
                                 <option value="-1">请选择</option>
                             </select>
-                          <div class="invalid-feedback">
+                            <div class="invalid-feedback">
                                 请填写此栏目
                             </div>
                         </div>
                         <div class="col-md-4">
                             <label for="state" class="form-label">楼号</label>
                             <select class="form-select" name="build" id="build" required>
-<option value="-1">请选择</option>
+                                <option value="-1">请选择</option>
 
                             </select>
-                           <div class="invalid-feedback">
+                            <div class="invalid-feedback">
                                 请填写此栏目
                             </div>
                         </div>
@@ -300,7 +318,8 @@
                         <div class="col-sm-6">
                             <div class="col-12">
                                 <label for="lon" class="form-label">经度</label>
-                                <input type="text" class="form-control" name="schoollon" value="{{ userconfig.schoollon }}" placeholder=" ">
+                                <input type="text" class="form-control" name="schoollon"
+                                       value="{{ userconfig.schoollon }}" placeholder=" ">
 
                             </div>
                         </div>
@@ -308,7 +327,8 @@
                         <div class="col-sm-6">
                             <div class="col-12">
                                 <label for="lat" class="form-label">纬度</label>
-                                <input type="text" class="form-control" name="schoollat" value="{{ userconfig.schoollat }}" placeholder=" ">
+                                <input type="text" class="form-control" name="schoollat"
+                                       value="{{ userconfig.schoollat }}" placeholder=" ">
 
                             </div>
                         </div>
@@ -321,16 +341,16 @@
                 </form>
             </div>
         </div>
-</main>
+    </main>
 
-<footer class="my-5 pt-5 text-muted text-center text-small">
-    <p class="mb-1">&copy; Powered By Django</p>
-{#    <ul class="list-inline">#}
-{#        <li class="list-inline-item"><a href="#">Privacy</a></li>#}
-{#        <li class="list-inline-item"><a href="#">Terms</a></li>#}
-{#        <li class="list-inline-item"><a href="#">Support</a></li>#}
-{#    </ul>#}
-</footer>
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; Powered By Django</p>
+        {#    <ul class="list-inline">#}
+        {#        <li class="list-inline-item"><a href="#">Privacy</a></li>#}
+        {#        <li class="list-inline-item"><a href="#">Terms</a></li>#}
+        {#        <li class="list-inline-item"><a href="#">Support</a></li>#}
+        {#    </ul>#}
+    </footer>
 </div>
 
 
